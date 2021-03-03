@@ -2,6 +2,7 @@
     margin: 0;
     padding:0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 .start-button{
@@ -9,14 +10,66 @@
     justify-content: center;
 }
 
+#text {
+    display: flex;
+    color:rgb(46, 46, 46);
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 auto;
+    justify-content: center;
+    right: 68px;
+    position: relative;
+    opacity: 0;
+    transition: all 1s ease;
+    background: transparent;
+    border: none;
+    bottom: 120px;
+}
+
+.no-transition{
+    transition: none !important;
+}
+
+.button {
+    display: flex;
+    color: azure;
+    background: #4CAF50;
+    border-radius: 7px;
+    padding: 15px 60px;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 auto;
+    justify-content: center;
+    right: 288px;
+    bottom: 560px;
+    position: static;
+    transition: all 1s ease;
+    border: none;
+    cursor: pointer !important;
+    font-size: 16px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: all 1s ease;
+    pointer-events: all;
+}
+
+.button:focus{
+    outline: 0;
+}
+
+
+.appear{
+    opacity: 1 !important;
+}
 
 .start-btn{
   background-color: #4CAF50;
   position: relative;
-  bottom: 300px;
+  bottom: 420px;
+  left: 5px;
   border: none;
   border-radius: 5px;
-  color: white;
+  color: azure;
   padding: 20px 50px;
   text-align: center;
   text-decoration: none;
@@ -26,9 +79,13 @@
   transition: all 1s ease;
 }
 
+.start-btn:focus{
+    outline: 0;
+}
+
 .disapear{
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 body{
@@ -41,17 +98,21 @@ body{
 }
 
 h1{
-    padding-top: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     font-size: 4rem;
     text-align: center;
     color: rgb(46, 46, 46)
 }
 
 .board{
+    position: relative;
+    bottom: 60px;
+    left: 1px;
     display: flex;
     margin: 0 auto;
-    height: 70vh;
-    width: 80vh;
+    height: 90vh;
+    width: 90vh;
     justify-content: center;
     align-items: center;
     opacity: 0;
@@ -61,11 +122,11 @@ h1{
 
 .show-board{
     opacity: 1;
-    pointer-events: all;
-    cursor: pointer;
 }
 
 .space{
+    pointer-events: all;
+    cursor: pointer;
     border: rgba(24, 24, 24, .8) 3px solid;
     border-radius: 5px;
     background-image: linear-gradient(140deg, rgba(255,255,255,.1), rgba(255,255,255,.3));
@@ -79,8 +140,16 @@ h1{
     align-items: center;
 }
 
+
 .x {
     font-size: 70px;
     font-family: 'RocknRoll One', sans-serif;
     color: rgba(17, 17, 17, 0.9);
+}
+
+.x::selection { 
+    background: transparent; 
+} 
+.x::-moz-selection { 
+    background: transparent; 
 }

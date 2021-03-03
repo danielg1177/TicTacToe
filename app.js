@@ -8,11 +8,15 @@ const space5 = document.getElementById('space5');
 const space6 = document.getElementById('space6');
 const space7 = document.getElementById('space7');
 const space8 = document.getElementById('space8');
+const text = document.getElementById('text');
+const playAgainButton = document.getElementsByClassName('button')[0]
 const board = document.getElementsByClassName('board')[0];
 const startButton = document.getElementsByClassName('start-btn')[0];
 let boardArr = ['','','','','','','','',''];
+let onBoard = false;
+let gameStarted = false;
 let turn = 0;
-let winningToken;
+let winningToken = false;
 const winningArray = [
     [0,1,2],
     [3,4,5],
@@ -31,33 +35,65 @@ startButton.addEventListener('click', function(){
     startButton.classList.add('disapear');
     setInterval(function(){
         board.classList.add('show-board');
+        playAgainButton.classList.add('appear')
+        gameStarted = true;
     }, 1000)   
 })
 
 //Functions
+function toggleText(option){
+    if(option === true) {
+        text.innerText = 'Draw Game';
+        text.classList.add('appear');
+        playAgainButton.innerText = 'Play Again'
+    } else {
+        console.log('toggle')
+        text.innerText = `${winningToken.toUpperCase()} Wins!`;
+        text.classList.add('appear');
+        playAgainButton.innerText = 'Play Again'
+    }
+
+};
+
+
+// Check Board
+playAgainButton.addEventListener('click', function(){
+    console.log('click')
+    endGame()
+    text.classList.remove('appear')
+    setInterval(function(){
+        text.classList.remove('no-transition')
+    }, 1000)
+})
+
 
 //Check for win function
 function checkForWin(boardArr){
     
     for (let i = 0; i < winningArray.length; i++){
-
         let combo = winningArray[i];
         let index0 = combo[0];
         let index1 = combo[1];
         let index2 = combo[2];
         
-        
-        if(boardArr[index0] !== '' && boardArr[index0] === boardArr[index1] && boardArr[index1] === boardArr[index2]) {
-           winningToken = boardArr[index0]
-           alert(`${winningToken} is the winner`)
-           endGame(boardArr)
-       }
+        if(boardArr[index0] !== '' && 
+           boardArr[index0] === boardArr[index1] && 
+           boardArr[index1] === boardArr[index2]) {
+                winningToken = boardArr[index0]
+                toggleText(false)
+        }
     }
+    if (winningToken === false){
+            return false;
+    }
+
 }
 
 //Check for draw function
 function checkForDraw(arr){
     if(turn === 9 && checkForWin(arr) === false){
+        toggleText(true)
+        winningToken = true;
         return true
     } else {
         return false
@@ -67,6 +103,9 @@ function checkForDraw(arr){
 //restarts board
 function endGame(arr){
     turn = 0;
+    text.classList.add('no-transition')
+    winningToken = false;
+    playAgainButton.innerText = "New Game"
     boardArr = ['','','','','','','','',''];
     space0.innerText = '';
     space1.innerText = '';
@@ -77,34 +116,49 @@ function endGame(arr){
     space6.innerText = '';
     space7.innerText = '';
     space8.innerText = '';
+    
+}
+
+function checkBoard(){
+    checkForWin(boardArr)
+    checkForDraw(boardArr)
 }
 
 //Plays Turn
 board.addEventListener('click', function(e){
     //Gets Index of clicked space
+    if (gameStarted === true) {
     let index;
     if(e.target.id === 'space0'){
         index = 0;
     } else if(e.target.id === 'space1') {
+        onBoard = true;
         index = 1;
     } else if(e.target.id === 'space2') {
+        onBoard = true;
         index = 2;
     } else if(e.target.id === 'space3') {
+        onBoard = true;
         index = 3;
     } else if(e.target.id === 'space4') {
+        onBoard = true;
         index = 4;
     } else if(e.target.id === 'space5') {
+        onBoard = true;
         index = 5;
     } else if(e.target.id === 'space6') {
+        onBoard = true;
         index = 6;
     } else if(e.target.id === 'space7') {
+        onBoard = true;
         index = 7;
     } else if(e.target.id === 'space8') {
+        onBoard = true;
         index = 8;
     }
 
     //Checks if positions taken, if not creates token and adds to array
-    if (boardArr[index] === '') {
+    if (boardArr[index] === '' && winningToken === false) {
         let h2 = document.createElement('h2');
         h2.classList.add('x')
         if(turn % 2 === 0){
@@ -119,15 +173,16 @@ board.addEventListener('click', function(e){
         e.target.appendChild(h2)
         turn++  
 
-    } else {
-        alert('Position taken')
-    }
+        checkBoard()
 
-    if (checkForWin(boardArr)) {
-        alert(`${winningToken} is the winner`)
-    } else if (checkForDraw(boardArr)) {
-        alert("Draw game")
-        endGame(boardArr)
+    } else if(onBoard === true && winningToken === false){
+        text.innerText = 'Position Taken';
+        console.log(e.target)
+        text.classList.add('appear');
+        setInterval(function(){
+            text.classList.remove('appear')
+    },  2500)
+    }
     }
 })
 
