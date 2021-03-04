@@ -9,7 +9,7 @@ const space6 = document.getElementById('space6');
 const space7 = document.getElementById('space7');
 const space8 = document.getElementById('space8');
 const text = document.getElementById('text');
-const playAgainButton = document.getElementsByClassName('button')[0]
+const playAgainButton = document.getElementsByClassName('button')[0];
 const board = document.getElementsByClassName('board')[0];
 const startButton = document.getElementsByClassName('start-btn')[0];
 let boardArr = ['','','','','','','','',''];
@@ -26,18 +26,18 @@ const winningArray = [
     [2,5,8],
     [0,4,8],
     [2,4,6]
-    ]
+    ];
 
 
 
 //Start Game Button
 startButton.addEventListener('click', function(){
     startButton.classList.add('disapear');
-    setInterval(function(){
+    setTimeout(function(){
         board.classList.add('show-board');
-        playAgainButton.classList.add('appear')
+        playAgainButton.classList.add('button-appear')
         gameStarted = true;
-    }, 1000)   
+    }, 900)   
 })
 
 //Functions
@@ -47,7 +47,6 @@ function toggleText(option){
         text.classList.add('appear');
         playAgainButton.innerText = 'Play Again'
     } else {
-        console.log('toggle')
         text.innerText = `${winningToken.toUpperCase()} Wins!`;
         text.classList.add('appear');
         playAgainButton.innerText = 'Play Again'
@@ -58,7 +57,6 @@ function toggleText(option){
 
 // Check Board
 playAgainButton.addEventListener('click', function(){
-    console.log('click')
     endGame()
     text.classList.remove('appear')
     setInterval(function(){
@@ -68,18 +66,19 @@ playAgainButton.addEventListener('click', function(){
 
 
 //Check for win function
-function checkForWin(boardArr){
+function checkForWin(arr){
     
     for (let i = 0; i < winningArray.length; i++){
         let combo = winningArray[i];
         let index0 = combo[0];
         let index1 = combo[1];
         let index2 = combo[2];
+        console.log(boardArr)
         
-        if(boardArr[index0] !== '' && 
-           boardArr[index0] === boardArr[index1] && 
-           boardArr[index1] === boardArr[index2]) {
-                winningToken = boardArr[index0]
+        if(arr[index0] !== '' && 
+           arr[index0] === arr[index1] && 
+           arr[index1] === arr[index2]) {
+                winningToken = arr[index0]
                 toggleText(false)
         }
     }
@@ -130,6 +129,7 @@ board.addEventListener('click', function(e){
     if (gameStarted === true) {
     let index;
     if(e.target.id === 'space0'){
+        onBoard = true;
         index = 0;
     } else if(e.target.id === 'space1') {
         onBoard = true;
@@ -172,16 +172,14 @@ board.addEventListener('click', function(e){
         //appends token to spot and adds a turn
         e.target.appendChild(h2)
         turn++  
-
         checkBoard()
 
     } else if(onBoard === true && winningToken === false){
         text.innerText = 'Position Taken';
-        console.log(e.target)
         text.classList.add('appear');
-        setInterval(function(){
+        setTimeout(function(){
             text.classList.remove('appear')
-    },  2500)
+    }, 1500)
     }
     }
 })
