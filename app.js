@@ -59,7 +59,7 @@ function toggleText(option){
 playAgainButton.addEventListener('click', function(){
     endGame()
     text.classList.remove('appear')
-    setInterval(function(){
+    setTimeout(function(){
         text.classList.remove('no-transition')
     }, 1000)
 })
