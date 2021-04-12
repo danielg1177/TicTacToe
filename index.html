@@ -14,31 +14,41 @@
         <title>Gordon's Tic Tac Toe</title>
     </head>
     <body>
-        <div class="header">
-            <h1>Tic Tac Toe</h1>
-            <button class="button">New Game</button>
-        </div>
-        <div class="board">
-            <div class="row1">
-            <div class="space" id="space0"></div>
-            <div class="space" id="space3"></div>
-            <div class="space" id="space6"></div>
+        <div class="container">
+            <div class="header">
+                <h1>Tic Tac Toe</h1>
+                <button class="computer-new-game button">New Game VS Computer</button>
+                <button class="opponent-new-game button">New Game VS Friend</button>
+                <div class="options_container">
+                    <select name="options" id="filter">
+                        <option value="x">Start as X</option>
+                        <option value="o">Start as O</option>
+                    </select>
+                </div>
             </div>
-            <div class="row2">
-            <div class="space" id="space1"></div>
-            <div class="space" id="space4"></div>
-            <div class="space" id="space7"></div>
+            <div class="board">
+                <div class="row1">
+                <div class="space" id="space0"></div>
+                <div class="space" id="space3"></div>
+                <div class="space" id="space6"></div>
+                </div>
+                <div class="row2">
+                <div class="space" id="space1"></div>
+                <div class="space" id="space4"></div>
+                <div class="space" id="space7"></div>
+                </div>
+                <div class="row3">
+                <div class="space" id="space2"></div>
+                <div class="space" id="space5"></div>
+                <div class="space" id="space8"></div>
+                </div>
             </div>
-            <div class="row3">
-            <div class="space" id="space2"></div>
-            <div class="space" id="space5"></div>
-            <div class="space" id="space8"></div>
-            </div>
-        </div>
-        <div class="start-button">
-            <button class="start-btn">Start</button>
-            <div class="text">
-                <h2 id='text'></h2>
+            <div class="start-button">
+                <button class="opponent-start-btn start-btn">Start Against Friend</button>
+                <button class="computer-start-btn start-btn">Start Against Computer</button>
+                <div class="text">
+                    <h2 id='text'></h2>
+                </div>
             </div>
         </div>
     
