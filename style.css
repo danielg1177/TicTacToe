@@ -133,6 +133,13 @@ select {
     height: 400px;
     width: 400px;
   }
+
+  .options_container {
+      bottom: 10%;
+      left: 75%;
+
+  }
+
 }
 
 @media (max-width: 768px) {
