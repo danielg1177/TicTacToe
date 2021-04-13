@@ -1,0 +1,17 @@
+.header {
+  height: 200px;
+  margin-top: 30px;
+}
+
+h1 {
+  font-size: 4rem;
+  text-align: center;
+  color: rgb(41, 41, 41);
+}
+
+h1::selection {
+  background: transparent;
+}
+h1::-moz-selection {
+  background: transparent;
+}

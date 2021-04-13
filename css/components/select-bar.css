@@ -1,0 +1,28 @@
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  color: azure;
+  width: 7rem;
+  padding: 0.7rem;
+  cursor: pointer;
+  background: #ff3c38;
+}
+
+.options_container {
+  margin: 1rem;
+  position: absolute;
+  overflow: hidden;
+  bottom: 80%;
+  left: 80%;
+}
+
+@media (max-width: 547px) {
+    .options_container {
+        bottom: 2%;
+        left: 75%;
+        margin-right: 10px; 
+    }
+}

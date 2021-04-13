@@ -1,0 +1,88 @@
+.button {
+  color: azure;
+  background: #ff3c38;
+  border-radius: 7px;
+  padding: 15px 60px;
+  text-align: center;
+  font-size: 2rem;
+  margin: 0 auto;
+  transition: all 1s ease;
+  border: none;
+  cursor: pointer !important;
+  font-size: 16px;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 1s ease, color 0.3s ease, background 0.3s ease;
+  pointer-events: all;
+}
+
+.button:hover {
+  transform: all 0.3s ease;
+  background: azure;
+  color: #ff3c38;
+}
+
+.button-appear {
+  opacity: 0.9;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.opponent-new-game {
+  margin-bottom: 0.5rem;
+}
+
+.start-btn {
+  background-color: #ff3c38;
+  border: none;
+  position: relative;
+  bottom: 10rem;
+  border-radius: 5px;
+  color: azure;
+  padding: 20px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity 1s ease, color 0.3s ease, background 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: azure;
+  color: #ff3c38;
+}
+
+.start-btn:focus {
+  outline: 0;
+}
+
+.start-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.start-btn-div {
+  margin: 10px;
+}
+
+@media (max-width: 547px) {
+  .start-btn {
+    padding: 15px 38px;
+  }
+}
+
+@media (max-width: 768px) {
+  .start-btn {
+    padding: 17.5px 44px;
+  }
+}
+
+.button::selection {
+  background: transparent;
+}
+.button::-moz-selection {
+  background: transparent;
+}
