@@ -1,13 +1,13 @@
 
-const space0 = document.getElementById('space0');
-const space1 = document.getElementById('space1');
-const space2 = document.getElementById('space2');
-const space3 = document.getElementById('space3');
-const space4 = document.getElementById('space4');
-const space5 = document.getElementById('space5');
-const space6 = document.getElementById('space6');
-const space7 = document.getElementById('space7');
-const space8 = document.getElementById('space8');
+const space0 = document.getElementById('0');
+const space1 = document.getElementById('1');
+const space2 = document.getElementById('2');
+const space3 = document.getElementById('3');
+const space4 = document.getElementById('4');
+const space5 = document.getElementById('5');
+const space6 = document.getElementById('6');
+const space7 = document.getElementById('7');
+const space8 = document.getElementById('8');
 const text = document.getElementById('text');
 const computerPlayAgainButton = document.getElementsByClassName('computer-new')[0];
 const opponentPlayAgainButton = document.getElementsByClassName('opponent-new')[0];
@@ -77,20 +77,21 @@ function toggleText(option){
 };
 
 
-// Check Board
+// Starts game against computer
 computerPlayAgainButton.addEventListener('click', function(){
     inPlay = false
     computerGame = true
     playAgain()
 })
 
+//starts game against friend
 opponentPlayAgainButton.addEventListener('click', function(){
     inPlay = false
     computerGame = false
     playAgain()
 })
 
-
+//resets the board and the game start state
 function playAgain(){
     endGame(boardArr)
     gameStarted = true
@@ -101,9 +102,9 @@ function playAgain(){
 }
 
 
-//Check for win
+//Check for win (returns object with boolean & winning token if there was a win)
 function checkForWin(arr){
-    
+    let returnValue = false
     for (let i = 0; i < winningArray.length; i++){
         let combo = winningArray[i];
         let index0 = combo[0];
@@ -113,25 +114,27 @@ function checkForWin(arr){
         if(arr[index0] !== '' && 
            arr[index0] === arr[index1] && 
            arr[index1] === arr[index2]) {
-                winningToken = arr[index0]
-                toggleText(false)
+            returnValue = { win: true, token: arr[index0]  }
         }
-    }
-    if (winningToken === false){
-            return false;
-    }
-
+     }
+     if (returnValue === false){
+            returnValue = { win: false, token: null }
+     }
+     return returnValue
 }
 
-//Check for draw function
+//Sets win the winning state for the game
+function setWin(token) {
+    winningToken = token
+    toggleText(false)
+}
+
+//Check for draw & ends game if there is a draw
 function checkForDraw(arr){
-    if(turn === 9 && checkForWin(arr) === false){
+    if(turn === 9 && checkForWin(arr).win === false){
         toggleText(true)
         winningToken = true;
-        return true
-    } else {
-        return false
-    }
+    } 
 }
 
 //restarts board
@@ -160,7 +163,14 @@ function placeToken(index, token) {
     h2.classList.add('x')
     h2.innerText = token.toUpperCase()
     boardArr[index] = token
-    document.getElementById(`space${index}`).appendChild(h2)
+    document.getElementById(`${index}`).appendChild(h2)
+}
+
+//Checks if space is on the board
+function checkIfSpaceExsists(id){
+    if ([0,1,2,3,4,5,6,7,8].includes(Number(id))){
+        onBoard = true
+    }
 }
 
 //logic for which token
@@ -180,83 +190,103 @@ function placeLogic(index, i){
     }
 }
 
+//Checks the board for a draw or win
 function checkBoard(){
-    checkForWin(boardArr)
+    winObject = checkForWin(boardArr)
+    if (winObject.win === true){
+        gameStarted = false
+        setWin(winObject.token)
+    }
     checkForDraw(boardArr)
 }
 
-//computer logic
-function computerTurn(){
-    if (winningToken === false){
-    index = Math.floor ( Math.random() * boardArr.length )
-    option = boardArr[index]
-        if (option === '') {
-            setTimeout(function(){
-                placeLogic(index, 1)
-                checkBoard()
-            }, 1000)
-        } else {
-            computerTurn()
+//returns an array of the indexs that are empty
+function emptyIndexs(){
+    let indexArr = []
+    let counter = 0
+    boardArr.forEach((position) => {
+        if(position === ''){
+            indexArr.push(counter)
         }
-    }
+        counter++
+    })
+    return indexArr
 }
 
-//Dropdown options
+// Checks if opponent is close to a win
+function checkIfClose(x){
+    let emptyIndexArr = emptyIndexs()
+    let fakeBoard = boardArr
+    let returnValue = false
+    emptyIndexArr.some((emptyIndex) => {
+        fakeBoard[emptyIndex] = x
+        if((checkForWin(fakeBoard).win === true) && (Math.floor(Math.random() * 15) !== 1)){
+            returnValue = emptyIndex
+        }
+        fakeBoard[emptyIndex] = ''
+    })
+    return returnValue
+}
+
+
+
+//computer logic
+function computerTurn(){
+    let index;
+    let opponentCheckResults = checkIfClose(thisGame)
+    let computerCheckResults= checkIfClose(thisGame === 'x' ? 'o' : 'x')
+    if (computerCheckResults !== false) {
+        index = computerCheckResults
+    } else if (opponentCheckResults !== false){
+        index = opponentCheckResults
+    } 
+    else {
+        index = emptyIndexs()[Math.floor ( Math.random() * emptyIndexs().length )]
+    }
+    setTimeout(function(){
+        placeLogic(index, 1)
+        checkBoard()
+    }, 1000)
+}
+
+//updates the next game start token based on the dropdown
 dropdown.addEventListener('change', function(e){
     nextGame = e.target.value
 })
 
-//Plays Turn against opponent
+//Starts game when a space is clicked
 board.addEventListener('click', function(e){
-    //Gets Index of clicked space
+
+    //Checks whats the prefered token for whoever starts
     if (gameStarted === true) {
         if (inPlay === false) {
             thisGame = nextGame
             inPlay = true
         }
-        let index;
-        if(e.target.id === 'space0'){
-            onBoard = true;
-            index = 0;
-        } else if(e.target.id === 'space1') {
-            onBoard = true;
-            index = 1;
-        } else if(e.target.id === 'space2') {
-            onBoard = true;
-            index = 2;
-        } else if(e.target.id === 'space3') {
-            onBoard = true;
-            index = 3;
-        } else if(e.target.id === 'space4') {
-            onBoard = true;
-            index = 4;
-        } else if(e.target.id === 'space5') {
-            onBoard = true;
-            index = 5;
-        } else if(e.target.id === 'space6') {
-            onBoard = true;
-            index = 6;
-        } else if(e.target.id === 'space7') {
-            onBoard = true;
-            index = 7;
-        } else if(e.target.id === 'space8') {
-            onBoard = true;
-            index = 8;
-        }
 
-    //Checks if positions taken, if not creates token and adds to array
+        //Gets Index of clicked space => checks if space exsists
+        let index = Number(e.target.id)
+        checkIfSpaceExsists(e.target.id)
+
+    // For game w/ friend: places token => increases the turn count => checks board
     if (boardArr[index] === '' && winningToken === false && computerGame === false) {
         placeLogic(index, 0)
         turn++  
         checkBoard()
+    }
 
-    } else if(boardArr[index] === '' && winningToken === false && computerGame === true) {
+    //For computer game: places token => increases turn count => checks board => Computer turn => increases turn count
+    else if(boardArr[index] === '' && winningToken === false && computerGame === true) {
         placeLogic(index, 0)
         turn++
         checkBoard()
-        computerTurn()
-        turn++
+        if (gameStarted === true) {
+            turn++
+            computerTurn()
+        }
     }
+
+    //Alerts player that position is taken
         else if(onBoard === true && winningToken === false){
         text.innerText = 'Position Taken';
         text.classList.add('appear');
@@ -267,7 +297,3 @@ board.addEventListener('click', function(e){
     }
 } 
 })
-
-//Plays against computer
-
-    
