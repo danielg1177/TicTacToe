@@ -17,8 +17,13 @@
         <div class="container">
             <div class="header">
                 <h1>Tic Tac Toe</h1>
-                <button class="computer-new-game button">New Game VS Computer</button>
-                <button class="opponent-new-game button">New Game VS Friend</button>
+                <div class="opponent-new-game">
+                    <button class="opponent-new button">New Game VS Friend</button>
+                </div>
+
+                <div class="computer-new-game">
+                    <button class="computer-new button">New Game VS Computer</button>
+                </div>
                 <div class="options_container">
                     <select name="options" id="filter">
                         <option value="x">Start as X</option>
@@ -27,27 +32,33 @@
                 </div>
             </div>
             <div class="board">
-                <div class="row1">
+                <div class="row">
                 <div class="space" id="space0"></div>
                 <div class="space" id="space3"></div>
                 <div class="space" id="space6"></div>
                 </div>
-                <div class="row2">
+                <div class="row">
                 <div class="space" id="space1"></div>
                 <div class="space" id="space4"></div>
                 <div class="space" id="space7"></div>
                 </div>
-                <div class="row3">
+                <div class="row">
                 <div class="space" id="space2"></div>
                 <div class="space" id="space5"></div>
                 <div class="space" id="space8"></div>
                 </div>
             </div>
-            <div class="start-button">
-                <button class="opponent-start-btn start-btn">Start Against Friend</button>
-                <button class="computer-start-btn start-btn">Start Against Computer</button>
+            <div class="footer">
                 <div class="text">
                     <h2 id='text'></h2>
+                </div>
+                <div class="start-buttons">
+                    <div class="start-btn-div">
+                        <button class="opponent-start-btn start-btn">Start VS Friend</button>
+                    </div>
+                    <div class="start-btn-div">
+                        <button class="computer-start-btn start-btn">Start VS Computer</button>
+                    </div>
                 </div>
             </div>
         </div>
