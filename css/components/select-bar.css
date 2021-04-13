@@ -16,7 +16,23 @@ select {
   position: absolute;
   overflow: hidden;
   bottom: 80%;
-  left: 80%;
+  left: 65%;
+  border-radius: 3px;
+}
+
+@media (max-width: 1100px) {
+    .options_container {
+        left: 75%;
+        margin-right: 10px; 
+    }
+}
+
+@media (max-width: 645px) {
+    .options_container {
+        left: 75%;
+        bottom: 78%;
+        margin-right: 10px; 
+    }
 }
 
 @media (max-width: 547px) {

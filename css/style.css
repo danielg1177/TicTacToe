@@ -20,6 +20,11 @@
   display: flex;
 }
 
+@media (min-width: 768px) {
+  .container {
+    width: 500px
+  }
+}
 
 .no-transition {
   transition: none !important;
@@ -38,8 +43,8 @@ body {
   background-image: linear-gradient(40deg, #e36414, #c98bb9);
   background-size: cover;
   min-height: 100vh;
+  display: flex;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
 

@@ -243,8 +243,10 @@ function computerTurn(){
     else {
         index = emptyIndexs()[Math.floor ( Math.random() * emptyIndexs().length )]
     }
+    gameStarted = false
     setTimeout(function(){
         placeLogic(index, 1)
+        gameStarted = true
         checkBoard()
     }, 1000)
 }
