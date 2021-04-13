@@ -135,9 +135,9 @@ select {
   }
 
   .options_container {
-      bottom: 6%;
-      left: 75%;
-
+    bottom: 2%;
+    left: 75%;
+    margin-right: 10px; 
   }
 
 }
@@ -190,9 +190,6 @@ body {
 }
 
 h1 {
-  /* margin-bottom: 1rem; */
-  /* padding-bottom: 7px; */
-  /* position: relative; */
   font-size: 4rem;
   text-align: center;
   color: rgb(41, 41, 41);
