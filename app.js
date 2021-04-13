@@ -72,8 +72,8 @@ function toggleText(option){
     }
     gameStarted = false
     inPlay = false
-    computerPlayAgainButton.innerText = 'Play Against Computer'
-    opponentPlayAgainButton.innerText = 'Play Against Friend'
+    computerPlayAgainButton.innerText = 'Play Again 1 Player'
+    opponentPlayAgainButton.innerText = 'Play Again 2 Players'
 };
 
 
@@ -142,8 +142,8 @@ function endGame(arr){
     turn = 0;
     text.classList.add('no-transition')
     winningToken = false;
-    computerPlayAgainButton.innerText = 'New Game VS Computer'
-    opponentPlayAgainButton.innerText = 'New Game VS Friend'
+    computerPlayAgainButton.innerText = 'New Game 1 Player'
+    opponentPlayAgainButton.innerText = 'New Game 2 Players'
     boardArr = ['','','','','','','','',''];
     space0.innerText = '';
     space1.innerText = '';
